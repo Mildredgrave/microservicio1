@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping("/colas")
+@RequestMapping("/api")
 @CrossOrigin(origins="*")
 public class EjemoloController {
 
-    @GetMapping("/traerejemplo")
-    public String traerejemplo(){
+    @GetMapping("/example")
+    public String example(){
         return "hola desde spring";
     }
 
@@ -21,5 +21,7 @@ public class EjemoloController {
     public String extraerPilas(){
         return "extraccion pilas";
     }
+
+   
 }
 
