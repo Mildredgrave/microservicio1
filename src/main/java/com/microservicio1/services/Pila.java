@@ -4,9 +4,10 @@ import org.springframework.stereotype.Service;
 import lombok.Getter;
 import java.util.Stack;
 
+
 @Getter
 @Service
-public class PilaService {
+public class Pila {
     private Stack<Integer> pila = new Stack<>();
 
     public void insertar(int valor) {

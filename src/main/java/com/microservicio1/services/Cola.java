@@ -6,11 +6,10 @@ import lombok.Getter;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
 @Service
 @Getter
 
-public class ColaService {
+public class Cola {
     private Queue<Integer> cola = new LinkedList<>();
 
     public void insertar(int valor) {

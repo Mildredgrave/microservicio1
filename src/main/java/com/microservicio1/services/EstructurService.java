@@ -1,6 +1,6 @@
 package com.microservicio1.services;
 
-import com.microservicio1.microservice.util.GraphvizUtil;
+import com.microservicio1.util.Graphviz;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,11 +11,11 @@ import java.io.InputStreamReader;
 @Service
 @RequiredArgsConstructor
 
-public class EstructuraService {
+public class EstructurService {
 
-    private final PilaService pila;
-    private final ColaService cola;
-
+    private final Pila pila;
+    private final Cola cola;
+    
     public String procesarCSV(MultipartFile file) throws Exception {
     // Limpia las estructuras antes de procesar el archivo
     limpiarEstructuras();
