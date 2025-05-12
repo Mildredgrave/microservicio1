@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/estructuras")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
+
 public class EstructuraController {
 
     private final EstructuraService service;
