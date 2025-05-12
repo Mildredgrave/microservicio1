@@ -10,52 +10,51 @@ import java.io.InputStreamReader;
 
 @Service
 @RequiredArgsConstructor
-
 public class EstructurService {
 
-    private final Pila pila;
-    private final Cola cola;
-    
-    public String procesarCSV(MultipartFile file) throws Exception {
-    // Limpia las estructuras antes de procesar el archivo
-    limpiarEstructuras();
+    private final Pila pilaEstructura;
+    private final Cola colaEstructura;
 
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-        String linea;
-        boolean skip = true;
-        String pathFinal = null;
+    public String procesarArchivoCSV(MultipartFile archivo) throws Exception {
+        BufferedReader lector = new BufferedReader(new InputStreamReader(archivo.getInputStream()));
+        String lineaActual;
+        boolean omitirPrimeraLinea = true;
+        String rutaFinalImagen = null;
 
-        while ((linea = reader.readLine()) != null) {
-            if (skip) { 
-                skip = false; 
-                continue; // Salta la primera línea (encabezado)
+        while ((lineaActual = lector.readLine()) != null) {
+            if (omitirPrimeraLinea) { 
+                omitirPrimeraLinea = false; 
+                continue; 
             }
+            String[] columnas = lineaActual.split(",");
+            if (columnas.length < 2) continue;
 
-            String[] partes = linea.split(",");
-            if (partes.length < 2) continue; // Ignora líneas inválidas
+            String tipoEstructura = columnas[0].trim().toLowerCase();
+            String tipoOperacion = columnas[1].trim().toLowerCase();
+            Integer valorOperacion = (columnas.length > 2 && !columnas[2].isEmpty()) ? Integer.parseInt(columnas[2].trim()) : null;
 
-            String estructura = partes[0].trim().toLowerCase();
-            String operacion = partes[1].trim().toLowerCase();
-            Integer valor = (partes.length > 2 && !partes[2].isEmpty()) ? Integer.parseInt(partes[2].trim()) : null;
+            String rutaImagen = null;
 
-            // Procesa la operación según la estructura
-            switch (estructura) {
+            switch (tipoEstructura) {
                 case "pila":
-                    pathFinal = procesarOperacionPila(operacion, valor);
+                    if ("insertar".equals(tipoOperacion)) pilaEstructura.insertar(valorOperacion);
+                    else pilaEstructura.eliminar();
+                    rutaImagen = Graphviz.generarImagen(pilaEstructura.generarDot(), "pila");
                     break;
 
                 case "cola":
-                    pathFinal = procesarOperacionCola(operacion, valor);
+                    if ("insertar".equals(tipoOperacion)) colaEstructura.agregar(valorOperacion);
+                    else colaEstructura.quitar();
+                    rutaImagen = Graphviz.generarImagen(colaEstructura.generarDot(), "cola");
                     break;
 
                 default:
-                    throw new IllegalArgumentException("Estructura no permitida: " + estructura);
+                    throw new IllegalArgumentException("Estructura no válida: " + tipoEstructura);
             }
+
+            rutaFinalImagen = rutaImagen;
         }
 
-        return pathFinal;
+        return rutaFinalImagen;
     }
 }
-
-}
-

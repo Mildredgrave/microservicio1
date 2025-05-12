@@ -8,30 +8,28 @@ import java.util.Queue;
 
 @Service
 @Getter
-
 public class Cola {
-    private Queue<Integer> cola = new LinkedList<>();
+    private Queue<Integer> elementos = new LinkedList<>();
 
-    public void insertar(int valor) {
-        cola.offer(valor);
+    public void agregar(int dato) {
+        elementos.offer(dato);
     }
-    public void eliminar() {
-        if (!cola.isEmpty()) {
-            cola.poll();
+
+    public void quitar() {
+        if (!elementos.isEmpty()) {
+            elementos.poll();
         }
     }
 
     public String generarDot() {
-        StringBuilder dot = new StringBuilder("digraph cola {\nrankdir=LR;\n");
-        int i = 0;
-        for (Integer val : cola) {
-            dot.append(String.format("n%d [label=\"%d\"];\n", i, val));
-            if (i > 0) dot.append(String.format("n%d -> n%d;\n", i - 1, i));
-            i++;
+        StringBuilder grafoDot = new StringBuilder("digraph cola {\nrankdir=LR;\n");
+        int indice = 0;
+        for (Integer valor : elementos) {
+            grafoDot.append(String.format("n%d [label=\"%d\"];\n", indice, valor));
+            if (indice > 0) grafoDot.append(String.format("n%d -> n%d;\n", indice - 1, indice));
+            indice++;
         }
-        dot.append("}");
-        return dot.toString();
+        grafoDot.append("}");
+        return grafoDot.toString();
     }
 }
-
-

@@ -10,7 +10,7 @@ public class Graphviz {
             return null; // Retorna null si el DOT es inválido
         }
 
-        String carpeta = "imagenes/";
+        String carpeta = "archivos-generados/";
         String uuid = UUID.randomUUID().toString();
         String dotPath = carpeta + nombreBase + "_" + uuid + ".dot";
         String imgPath = carpeta + nombreBase + "_" + uuid + ".png";
