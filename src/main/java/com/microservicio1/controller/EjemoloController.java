@@ -22,6 +22,5 @@ public class EjemoloController {
         return "extraccion pilas";
     }
 
-   
 }
 
