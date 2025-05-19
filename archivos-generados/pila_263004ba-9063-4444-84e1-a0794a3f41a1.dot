@@ -1,0 +1,4 @@
+digraph pila {
+rankdir=LR;
+n0 [label="10"];
+}

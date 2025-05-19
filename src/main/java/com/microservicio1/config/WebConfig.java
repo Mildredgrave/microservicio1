@@ -8,8 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry manejadorRecursos) {
-        manejadorRecursos.addResourceHandler("/archivos-generados/**")
-                .addResourceLocations("file:archivos-generados/");
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/api/datos-estructuras/imagen/**")
+                .addResourceLocations("file:archivos-generados/")
+                .setCachePeriod(0);
     }
 }
