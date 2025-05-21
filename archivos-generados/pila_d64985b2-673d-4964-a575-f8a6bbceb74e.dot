@@ -1,8 +1,0 @@
-digraph pila {
-rankdir=LR;
-n0 [label="10"];
-n1 [label="10"];
-n0 -> n1;
-n2 [label="20"];
-n1 -> n2;
-}

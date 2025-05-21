@@ -1,0 +1,5 @@
+digraph lista {
+rankdir=LR;
+node [shape=box];
+n0 [label="40"];
+}
